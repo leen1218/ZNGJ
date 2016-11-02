@@ -4,14 +4,14 @@ shortcut for ZhiNengGuanJia
 
 ## Frontend App.
 The Front end app is built on top of the following technologies:
-1. ReactJS
-2. NodeJS
-3. Webpack
-4. OnsenUI
-5. Cordova
-6. Redux
-7. ES6 
-8. ismorphic-fetch
+ 1. ReactJS
+ 2. NodeJS
+ 3. Webpack
+ 4. OnsenUI
+ 5. Cordova
+ 6. Redux
+ 7. ES6 
+ 8. isomorphic-fetch
 
 ### How to deploy.
 1. Make sure you have installed the latest `nodejs`
