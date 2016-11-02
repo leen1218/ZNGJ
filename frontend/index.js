@@ -25,17 +25,6 @@ const store = createStore(rootReducer,
     : applyMiddleware(thunk, logger)
 );
 
-
-// [
-//   'Tokyo',
-//   'New York',
-//   'London',
-//   'Beijing',
-//   'Sydney',
-//   'Rio de Janeiro',
-//   'Istanbul'
-// ].forEach((city) => store.dispatch(addLocationAndFetchWeather(city)));
-
 const rootElement = document.getElementById('root');
 let isEngineer = false;
 let App = isEngineer ? (<div> under construction </div>) : (<CustomerApp />)

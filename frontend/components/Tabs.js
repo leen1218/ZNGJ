@@ -21,17 +21,17 @@ class Tabs extends  React.Component {
         return [
             {
                 content: <Home navigator={this.props.navigator} />,
-                tab: <Tab label='首页' icon='md-home' />
+                tab: <Tab label='首页' icon='md-home' key={1}/>
             },
 
             {
                 content: <OrderInfo navigator={this.props.navigator} />,
-                tab: <Tab label='订单' icon='md-menu' />
+                tab: <Tab label='订单' icon='md-menu' key={2}/>
             },
 
             {
                 content: <UserInfo navigator={this.props.navigator} />,
-                tab: <Tab label='我' icon='md-settings' />
+                tab: <Tab label='我' icon='md-settings' key={3}/>
             }
         ];
     }

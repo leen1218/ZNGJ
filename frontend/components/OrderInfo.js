@@ -9,7 +9,7 @@ class OrderInfo extends  React.Component {
     constructor(props) {
         super(props);
         /*this.state = { };*/
-
+        this.key = 'OrderInfo_Key';
     }
 
     render() {

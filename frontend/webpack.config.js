@@ -4,7 +4,7 @@ var path = require('path');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   context: __dirname,
   entry: [
     'react-hot-loader/patch',

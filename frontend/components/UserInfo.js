@@ -11,6 +11,7 @@ class UserInfo extends  React.Component {
         super(props);
         /*this.state = { };*/
 
+        this.key = 'UserInfo_Key';
     }
 
     render() {
