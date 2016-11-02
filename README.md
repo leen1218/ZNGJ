@@ -1,4 +1,4 @@
-# 智能管家
+# 易修哥
 shortcut for ZhiNengGuanJia
 
 
