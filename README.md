@@ -12,6 +12,7 @@ The Front end app is built on top of the following technologies:
  6. Redux
  7. ES6 
  8. isomorphic-fetch
+ 9. ping++
 
 ### How to deploy.
 1. Make sure you have installed the latest `nodejs`
