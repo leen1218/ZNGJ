@@ -10,7 +10,7 @@ import {AppContainer} from 'react-hot-loader';
 import rootReducer from './reducers';
 import CustomerApp from './components/CustomerApp';
 
-import './icons/css/weather-icons.css';
+// import './icons/css/weather-icons.css';
 
 import ons from 'onsenui';
 import 'onsenui/css/onsenui.css';
@@ -25,7 +25,6 @@ const store = createStore(rootReducer,
     : applyMiddleware(thunk, logger)
 );
 
-import {addLocationAndFetchWeather} from './actions';
 
 // [
 //   'Tokyo',
@@ -38,8 +37,8 @@ import {addLocationAndFetchWeather} from './actions';
 // ].forEach((city) => store.dispatch(addLocationAndFetchWeather(city)));
 
 const rootElement = document.getElementById('root');
-let isTechnician = false;
-let App = isTechnician ? (<div> under construction </div>) : (<CustomerApp />)
+let isEngineer = false;
+let App = isEngineer ? (<div> under construction </div>) : (<CustomerApp />)
 
 ons.ready(() => render(
   <AppContainer>
@@ -51,10 +50,10 @@ ons.ready(() => render(
 ));
 
 if (module.hot) {
-  let appPath = isTechnician ? '' : './components/CustomerApp';
+  let appPath = isEngineer ? '' : './components/CustomerApp';
 
   module.hot.accept(appPath, () => {
-    const NextApp = isTechnician ?
+    const NextApp = isEngineer ?
         require('./components/CustomerApp').default      //todo FIXME!
         : require('./components/CustomerApp').default;
     render(

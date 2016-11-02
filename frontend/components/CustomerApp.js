@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { Navigator, Page } from 'react-onsenui';
+import Tabs from './Tabs';
 
-import {
-  Navigator
-} from 'react-onsenui';
+class CustomerApp extends  React.Component {
 
-//import MainPage from './MainPage';
+    constructor(props) {
+        super(props);
+        /*this.state = { };*/
+        this.renderPage = this.renderPage.bind(this);
+    }
 
-// const renderPage = (route, navigator) => (
-//   <route.component key={route.key} navigator={navigator} />
-// );
+    renderPage(route, navigator) {
+        route.props = route.props || {};
+        route.props.navigator = navigator;
 
-const CustomerApp = () => (
-      <div> history starts on <em>2017 Oct 31 22:48  </em> </div>
-);
+        return (<route.component {...route.props} />);
+    }
+
+    render() {
+        return (
+        <Navigator
+            renderPage={this.renderPage}
+            initialRoute={{component: Tabs}}
+        />
+        );
+    }
+}
+
+CustomerApp.propTypes = {
+
+};
+
+/*
+CustomerApp.defaultProps = {
+
+};
+
+*/
 
 export default CustomerApp;

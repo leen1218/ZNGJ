@@ -1,7 +1,7 @@
 {
-  "name": "react-onsenui-redux-weather",
+  "name": "Yi Xiu Ge",
   "version": "1.0.0",
-  "description": "Simple Weather App implemntation with Onsen UI React Components and Redux",
+  "description": "The smart APP to showcase the O2O approach for efficient amendment of household electrical appliances",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --progress --content-base www/",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/argelius/react-onsenui-redux-weather.git"
+    "url": "git+https://github.com/leen1218/ZNGJ.git"
   },
-  "author": "Andreas Argelius <andreas@argeli.us>",
+  "author": "semix@163.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/argelius/react-onsenui-redux-weather/issues"
+    "url": "https://github.com/leen1218/ZNGJ/issues"
   },
-  "homepage": "https://github.com/argelius/react-onsenui-redux-weather#readme",
+  "homepage": "https://github.com/leen1218/ZNGJ/blob/master/README.md",
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "babel-core": "^6.18.0",
