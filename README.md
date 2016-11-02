@@ -15,7 +15,7 @@ The Front end app is built on top of the following technologies:
  9. ping++
 
 ### How to deploy.
-1. Make sure you have installed the latest `nodejs`
+Make sure you have installed the latest `nodejs`
 With nodejs, you will have the package manager tool `NPM` )
 
 Link to [nodejs](https://nodejs.org/en/)
