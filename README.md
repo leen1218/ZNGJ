@@ -14,20 +14,20 @@ The Front end app is built on top of the following technologies:
 8. ismorphic-fetch
 
 ### How to deploy.
-0. Make sure you have installed the latest `nodejs`
+1. Make sure you have installed the latest `nodejs`
 With nodejs, you will have the package manager tool `NPM` )
 
 Link to [nodejs](https://nodejs.org/en/)
 
 
-1. clone the code to your local ENV.
+2. clone the code to your local ENV.
 > git clone https://github.com/leen1218/ZNGJ.git
 
-2. Install the required libraries
+3. Install the required libraries
 > cd /YourPathToProject/frontend  
 > npm install 
 
-3. And you are good to go! Enjoy!
+4. And you are good to go! Enjoy!
 >  npm start
 
 
