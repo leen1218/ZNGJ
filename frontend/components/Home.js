@@ -4,6 +4,8 @@
 
 import React, { PropTypes } from 'react';
 import { Page, List, ListItem, Icon } from 'react-onsenui';
+import { Categories } from './Categories';
+import { SubCategories } from './SubCateogories';
 
 class Home extends  React.Component {
 
@@ -13,18 +15,19 @@ class Home extends  React.Component {
         /*this.state = { };*/
 
         this.dataSource = [
-            {icon: 'md-face', title: '我要保修', sub: '各大品牌各种型号家电维修'},
-            {icon: 'md-face', title: '成为会员', sub: '享受VIP服务'},            //todo FIXME ICON
-            {icon: 'md-face', title: '扩展服务', sub: '其他业务扩展'}
+            {icon: 'md-face', title: '我要保修', sub: '各大品牌各种型号家电维修', next: Categories},
+            {icon: 'md-face', title: '成为会员', sub: '享受VIP服务', next: Categories},            //todo FIXME ICON and NEXT
+            {icon: 'md-face', title: '扩展服务', sub: '其他业务扩展', next: Categories}
         ];
         this.Key = 'HOME_KEY';
-        this.onRowClicked = this.onRowClicked.bind(this);
+        //this.onRowClicked = this.onRowClicked.bind(this);
     }
 
     onRowClicked(row, index) {
 
         const { navigator } = this.props;
         if (navigator) {
+            console.log(index);
             console.log(row);
             //navigator.pushPage();
         }
@@ -39,20 +42,17 @@ class Home extends  React.Component {
 
                 {/* Link Lists */}
                 <List dataSource = {this.dataSource}
-                    renderRow = {(row, index) => (
-                    <ListItem key = {index}> 
+                      renderRow = {(row, index) => (
+                    <ListItem key = {index} id = {index} tappable onClick={this.onRowClicked.bind(this, row.next)}>
                         <div className="left">
                             <Icon icon={row.icon} className="list__item__icon"  size={50} />
                         </div>
  
-                          <div className="center">
+                        <div className="center">
                             <span className="list__item__title">{row.title}</span>
                             <span className="list__item__subtitle">{row.sub}</span>
-                          </div>
-
+                        </div>
                     </ListItem>)}
-                    tappable
-                    onClick = {this.onRowClicked}
                 >
                 </List>
 
