@@ -4,8 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import { Page, List, ListItem, Icon } from 'react-onsenui';
-import { Categories } from './Categories';
-import { SubCategories } from './SubCateogories';
+import  Categories  from './Categories';
 
 class Home extends  React.Component {
 
@@ -20,20 +19,16 @@ class Home extends  React.Component {
             {icon: 'md-face', title: '扩展服务', sub: '其他业务扩展', next: Categories}
         ];
         this.Key = 'HOME_KEY';
-        //this.onRowClicked = this.onRowClicked.bind(this);
     }
 
-    onRowClicked(row, index) {
-
+    onRowClicked(nextPage) {
         const { navigator } = this.props;
         if (navigator) {
-            console.log(index);
-            console.log(row);
-            //navigator.pushPage();
+            console.log(nextPage);
+            navigator.pushPage({component: nextPage});
         }
     } 
-    
-    
+
     render() {
         return (
             <Page>
@@ -55,9 +50,6 @@ class Home extends  React.Component {
                     </ListItem>)}
                 >
                 </List>
-
-
-
             </Page>);
     }
 }

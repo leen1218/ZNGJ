@@ -3,6 +3,7 @@
  */
 
 import React, { PropTypes } from 'react';
+import { Page } from 'react-onsenui'
 class Categories extends  React.Component {
 
     constructor(props) {
@@ -13,7 +14,7 @@ class Categories extends  React.Component {
 
     render() {
         const {} = this.props;
-        return (<div>{'This is categories'}</div>);
+        return (<Page><div>{'This is categories'}</div></Page>);
     }
 }
 
