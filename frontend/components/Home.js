@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import { Page, List, ListItem, Icon } from 'react-onsenui';
-import  Categories  from './Categories';
+import  Categories  from '../containers/Categories';
 
 class Home extends  React.Component {
 

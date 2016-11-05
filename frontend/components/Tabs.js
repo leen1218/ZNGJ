@@ -5,8 +5,8 @@
 import React, { PropTypes } from 'react';
 import { Page, Tabbar, Tab } from 'react-onsenui';
 import Home from './Home';
-import OrderInfo from './OrderInfo';
-import UserInfo from './UserInfo';
+import OrderInfo from '../containers/OrderInfo';
+import UserInfo from '../containers/UserInfo';
 
 
 class Tabs extends  React.Component {

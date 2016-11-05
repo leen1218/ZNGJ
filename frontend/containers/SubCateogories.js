@@ -2,6 +2,7 @@
  * Created by Stone on 03/11/2016.
  */
 import React, { PropTypes } from 'react';
+import { Page } from 'react-onsenui';
 class SubCateogories extends  React.Component {
 
     constructor(props) {
@@ -12,7 +13,7 @@ class SubCateogories extends  React.Component {
 
     render() {
         const {} = this.props;
-        return (<div>{'Subcategories page'}</div>);
+        return (<Page> <div>{'Subcategories page'}</div></Page>);
     }
 }
 
