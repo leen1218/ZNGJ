@@ -4,11 +4,19 @@
 
 import React, { PropTypes } from 'react';
 import { Page } from 'react-onsenui';
+import PhotoUploader from '../components/PhotoUploader';
+import NavToolbar from '../components/NavToolbar';
+import OrderConfirmation from './OrderConfirmation';
+
 
 class ProblemReport extends React.Component {
 
     constructor(props) {
         super(props)
+    }
+
+    gotoDetails() {
+
     }
 
     render() {

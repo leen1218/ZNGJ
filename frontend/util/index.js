@@ -31,3 +31,14 @@
 //     return CLEAR;
 //   }
 // };
+
+
+var Utils =  {
+
+    //gotoComponent : (navigator, next, props) => { navigator && next && navigator.pushPage({component: next, ...props})};
+
+};
+
+
+
+export default Utils;
