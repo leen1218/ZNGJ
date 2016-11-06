@@ -21,7 +21,10 @@ class SimpleList extends  React.Component {
         if (row.icon) {
             iconBlock =(
                 <div className="left">
-                    <Icon icon={row.icon} className="list__item__icon" size={row.iconSize || 50}/>
+                    {row.iconSize
+                        ? (<Icon icon={row.icon} className="list__item__icon" size={row.iconSize}/>)
+                        : (<Icon icon={row.icon} className="list__item__icon" />)
+                    }
                 </div>
             );
         }

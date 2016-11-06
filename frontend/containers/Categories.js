@@ -22,29 +22,20 @@ class Categories extends React.Component {
         super(props);
         /*this.state = { };*/         //todo FIXME get category list from store.
         this.dataSource = [
-            {icon: 'md-face', iconSize: 28, title: '冰箱',  next: SubCateogries},
-            {icon: 'md-face', iconSize: 28,  title: '电视机',  next: SubCateogries},            //todo FIXME ICON and NEXT
-            {icon: 'md-face', iconSize: 28,  title: '微波炉',  next: SubCateogries},
-            {icon: 'md-face', iconSize: 28,  title: '空调',  next: SubCateogries}
+            {icon: 'md-face',  title: '冰箱',  next: SubCateogries},
+            {icon: 'md-face',  title: '电视机',  next: SubCateogries},            //todo FIXME ICON and NEXT
+            {icon: 'md-face',  title: '微波炉',  next: SubCateogries},
+            {icon: 'md-face',  title: '空调',  next: SubCateogries}
         ];
 
         this.onItemSelected = this.onItemSelected.bind(this);
-
-        this.aFun = this.aFun.bind(this);
-        this.bFun = this.bFun.bind(this);
     }
 
     onItemSelected(evt) {
+        //todo FIXME, get subCategories from store.
         gotoSubcategory.call(this, SubCateogries);
     }
 
-    // bFun() {
-    //
-    // }
-    //
-    // aFun() {
-    //     bFun();
-    // }
 
     render() {
         const {navigator} = this.props;
@@ -53,8 +44,7 @@ class Categories extends React.Component {
             clickCallback: this.onItemSelected
         };
         return (
-            <Page>
-                <NavToolbar hasBackButton={true} navigator={navigator}> </NavToolbar>
+            <Page renderToolbar = {() => (<NavToolbar hasBackButton={true} navigator={navigator}> </NavToolbar>)}>
                 <SimpleList  {...listProps} />
             </Page>
         );
