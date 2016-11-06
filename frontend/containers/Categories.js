@@ -22,10 +22,10 @@ class Categories extends React.Component {
         super(props);
         /*this.state = { };*/         //todo FIXME get category list from store.
         this.dataSource = [
-            {icon: 'md-face',  title: '冰箱',  next: SubCateogries},
-            {icon: 'md-face',  title: '电视机',  next: SubCateogries},            //todo FIXME ICON and NEXT
-            {icon: 'md-face',  title: '微波炉',  next: SubCateogries},
-            {icon: 'md-face',  title: '空调',  next: SubCateogries}
+            {icon: 'md-face',  title: '冰箱'},
+            {icon: 'md-face',  title: '电视机'},            //todo FIXME ICON
+            {icon: 'md-face',  title: '微波炉'},
+            {icon: 'md-face',  title: '空调'}
         ];
 
         this.onItemSelected = this.onItemSelected.bind(this);
@@ -58,7 +58,7 @@ Categories.propTypes = {
 };
 
 /*
-Categories.defaultProps = {
+SimpleCategories.defaultProps = {
  
 };
 
