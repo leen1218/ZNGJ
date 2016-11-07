@@ -14,7 +14,7 @@ import CustomerApp from './components/CustomerApp';
 
 import ons from 'onsenui';
 import 'onsenui/css/onsenui.css';
-import './stylus/index.styl';
+import './styles/stylus/index.styl';
 
 const logger = createLogger();
 
