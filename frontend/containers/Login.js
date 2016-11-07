@@ -3,8 +3,9 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Page, Button, Toolbar, Icon, Input, ToolbarButton, Row } from 'react-onsenui';
+import { Page, Button, Toolbar, Icon, Input, ToolbarButton, BackButton } from 'react-onsenui';
 import ons from 'onsenui';
+import NavToolbar from '../components/NavToolbar';
 
 //css
 import '../styles/css/login.css';
@@ -26,6 +27,10 @@ class Login extends  React.Component {
 
     signIn() {    //todo Fixme, not implemented yet.
         ons.notification.alert({message: `You entered '${this.state.email}' & '${this.state.password}' `});
+    }
+
+    signOut() {
+                //todo FIXME, consider incorporating logout in this page as well.
     }
 
     forgotPassword() {
@@ -54,6 +59,7 @@ class Login extends  React.Component {
     render() {
 
         let toolbarButton;
+        let  { navigator } = this.props;
 
         if (!ons.platform.isAndroid()) {
             toolbarButton = <ToolbarButton onClick={this.signIn}>
@@ -61,17 +67,25 @@ class Login extends  React.Component {
             </ToolbarButton>;
         }
 
-        const renderToolbar = () =>
+        /*const renderToolbar = () =>
             (<Toolbar>
-                <div className="center">Login</div>
+                <div className ='left'></div>
+                <div className="center">用户登录</div>
                 <div className="right">
                     {toolbarButton}
                 </div>
-            </Toolbar>);
+            </Toolbar>);*/
+
+        const NavToolbarPropos = {
+            hasBackButton: true,
+            navigator: navigator,
+            fwdIcon : (ons.platform.isAndroid() ? false : 'ion-log-in'),
+            fwdCallback: this.signIn,
+        };
 
         return (
             <div class="tile">
-                <Page id="login" renderToolbar={renderToolbar}>
+                <Page id="login" renderToolbar={()=><NavToolbar {...NavToolbarPropos} />}>
                     <Input value={this.state.email} onChange={this.emailChange} placeholder="手机号" type="text" modifier="underbar" float />
                     <Input value={this.state.password} onChange={this.passwordChange} placeholder="密码" type="password" modifier="underbar" float />
                     <Button id='signIn' onClick={this.signIn} modifier="large">登录</Button>
