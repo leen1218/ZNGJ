@@ -4,7 +4,8 @@
 
 import React, { PropTypes } from 'react';
 import { Page, List, ListItem, Icon } from 'react-onsenui';
-import  Categories  from '../containers/Categories';
+import Categories  from '../containers/Categories';
+import Login from '../containers/Login';
 
 class Home extends  React.Component {
 
@@ -13,11 +14,13 @@ class Home extends  React.Component {
         super(props);
         /*this.state = { };*/
 
+        //todo FIXME ICON and NEXT, not 'next' can vary depends on if user is logged in or not.
         this.dataSource = [
             {icon: 'md-face', title: '我要保修', sub: '各大品牌各种型号家电维修', next: Categories},
-            {icon: 'md-face', title: '成为会员', sub: '享受VIP服务', next: Categories},            //todo FIXME ICON and NEXT
+            {icon: 'md-face', title: '成为会员', sub: '享受VIP服务', next: Login},
             {icon: 'md-face', title: '扩展服务', sub: '其他业务扩展', next: Categories}
         ];
+
         this.Key = 'HOME_KEY';
     }
 

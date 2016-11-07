@@ -6,7 +6,11 @@ const NavToolbar = ({title, navigator, hasBackButton, fwdIcon, fwdImageIcon, fwd
     <Toolbar>
         hasBackButton ? (
         <div className='left'>
-             <BackButton onClick={() => navigator.popPage()}>Back</BackButton>
+             <BackButton onClick={
+                () => navigator.popPage()
+                }>
+                 回退
+             </BackButton>
         </div>
         ) : null;
 

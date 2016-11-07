@@ -76,7 +76,7 @@ class Login extends  React.Component {
                 </div>
             </Toolbar>);*/
 
-        const NavToolbarPropos = {
+        const NavToolbarProps = {
             hasBackButton: true,
             navigator: navigator,
             fwdIcon : (ons.platform.isAndroid() ? false : 'ion-log-in'),
@@ -84,14 +84,12 @@ class Login extends  React.Component {
         };
 
         return (
-            <div class="tile">
-                <Page id="login" renderToolbar={()=><NavToolbar {...NavToolbarPropos} />}>
-                    <Input value={this.state.email} onChange={this.emailChange} placeholder="手机号" type="text" modifier="underbar" float />
-                    <Input value={this.state.password} onChange={this.passwordChange} placeholder="密码" type="password" modifier="underbar" float />
-                    <Button id='signIn' onClick={this.signIn} modifier="large">登录</Button>
-                    <Button id='forgetBtn'  onClick={this.forgotPassword} modifier="quiet">忘记密码?</Button>
-                </Page>
-            </div>
+            <Page id="login" renderToolbar={()=><NavToolbar {...NavToolbarProps} />}>
+                <Input value={this.state.email} onChange={this.emailChange} placeholder="手机号" type="text" modifier="underbar" float />
+                <Input value={this.state.password} onChange={this.passwordChange} placeholder="密码" type="password" modifier="underbar" float />
+                <Button id='signIn' onClick={this.signIn} modifier="large">登录</Button>
+                <Button id='forgetBtn'  onClick={this.forgotPassword} modifier="quiet">忘记密码?</Button>
+            </Page>
         );
 
     }
