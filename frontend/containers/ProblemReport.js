@@ -21,7 +21,19 @@ class ProblemReport extends React.Component {
 
     render() {
         const {} = this.props;
-        return (<Page> <div> {'this is problem report page'} </div></Page>);
+        return (
+            <Page>
+                {/*Photos*/}
+                <div className="photoTaker">
+                </div>
+
+                {/*user address*/}
+                
+
+                {/*service date*/}
+                
+            </Page>
+        );
     }
 }
 

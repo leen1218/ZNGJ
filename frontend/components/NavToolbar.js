@@ -27,7 +27,7 @@ const NavToolbar = ({title, navigator, hasBackButton, fwdIcon, fwdImageIcon, fwd
         fwdImageIcon ? (
             <div className="right">
                 <ToolbarButton onClick={fwdCallback}>
-                    <Icon icon={fwdImageIcon}> </Icon> //todo FixME use image.
+                    <img src={fwdImageIcon}/>
                 </ToolbarButton>
             </div>
         ) : null;
