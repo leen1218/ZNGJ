@@ -2,7 +2,7 @@
  * Created by Stone on 04/11/2016.
  */
 
-import { Icon, List, ListItem } from 'react-onsenui';
+import { Icon, List, ListItem, ListHeader } from 'react-onsenui';
 
 import React, { PropTypes } from 'react';
 class SimpleList extends  React.Component {
@@ -11,6 +11,7 @@ class SimpleList extends  React.Component {
         super(props);
         /*this.state = { };*/
         this.renderRow = this.renderRow.bind(this);
+        this.renderHeader = this.renderHeader.bind(this);
     }
 
     renderRow(row, index) {
@@ -59,11 +60,22 @@ class SimpleList extends  React.Component {
 
         }
     }
-    
+
+    renderHeader() {
+
+        const { header } = this.props;
+        if (header && header.length) {
+            return <ListHeader> {header} </ListHeader>
+        }
+
+        return null;
+    }
+
     render() {
-        const { dataSource, styles} = this.props;
+        const { dataSource, renderRowCallback, styles } = this.props;
+
         return (
-            <List dataSource={dataSource} renderRow={this.renderRow}>
+            <List dataSource={dataSource} renderRow={renderRowCallback || this.renderRow} renderHeader={this.renderHeader}>
             </List>
         );
     }

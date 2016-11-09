@@ -32,7 +32,7 @@ class SubCateogories extends  React.Component {
     }
 
     onItemClicked(evt) {
-        let alreadyLogin = false;
+        let alreadyLogin = true;
         if (alreadyLogin)  {
             this.gotoNext(ProblemReport);
         } else {
