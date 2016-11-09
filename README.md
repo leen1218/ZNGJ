@@ -14,6 +14,9 @@ The Front end app is built on top of the following technologies:
  8. isomorphic-fetch
  9. ping++
  10. RESTful API.
+ 11. BackboneJS (optional)
+ 12. Antd/React-components
+
 
 ### How to deploy.
 Make sure you have installed the latest `nodejs`
