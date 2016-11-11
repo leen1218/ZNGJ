@@ -11,7 +11,7 @@ import NavToolbar from '../components/NavToolbar';
 import PriceTags from './PriceTags';
 import OrderConfirmation from './OrderConfirmation';
 import AddressManagement from './AddressManagement';
-import DatePicker from '../components/DatePicker';
+import DateTimePicker from '../components/DatePicker';
 
 import ons from 'onsenui'
 
@@ -80,11 +80,11 @@ class ProblemReport extends React.Component {
                 </div>
 
                 {/*user address*/}
-                <Button> 选择上门服务地址 </Button>
+                <Button> 选择上门服务地址 </Button>            
                 {defaultAddressBlock}
 
                 {/*service date*/}
-                <DatePicker />
+                <DateTimePicker />
                 
                 {/*price tags*/}
                 <PriceTags />

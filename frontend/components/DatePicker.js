@@ -1,22 +1,36 @@
 /**
  * Created by Stone on 07/11/2016.
  */
+
 import React, { PropTypes } from 'react';
-class DatePicker extends React.Component {
+import DatePicker from 'antd/lib/date-picker';  // just for js
+import 'antd/lib/date-picker/style/css';  // with style
+
+
+//const { MonthPicker, RangePicker } = DatePicker;
+
+
+
+class DateTimePicker extends React.Component {
 
     constructor(props) {
         super(props);
         /*this.state = { };*/
-
+        this.onChange = this.onChange.bind(this);
     }
 
+    onChange(date, dateString) {
+        console.log(date, dateString);
+    }
+
+
     render() {
-        const {} = this.props;
-        return (<div> it's  DatePicker page</div>);
+        const {onChangeCallBack} = this.props;
+        return (<DatePicker  onChange={onChangeCallBack || this.onChange} />);
     }
 }
 
-DatePicker.propTypes = {
+DateTimePicker.propTypes = {
  
 };
 
