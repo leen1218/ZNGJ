@@ -24,7 +24,7 @@ class SubCateogories extends  React.Component {
         this.onItemClicked = this.onItemClicked.bind(this);
     }
 
-    gotoNext(next) {
+    gotoNext(next, props) {
         const { navigator } = this.props;
         if (next && navigator) {
             navigator.pushPage({component: next});
@@ -42,13 +42,19 @@ class SubCateogories extends  React.Component {
 
     render() {
         const { navigator } = this.props;
+       
         const listProps = {
             dataSource: this.dataSource,
             clickCallback: this.onItemClicked
         };
 
+        const navigatorProps = {
+            hasBackButton: true,
+            navigator: navigator,
+            title: '维修子类'
+        };
         return (
-            <Page renderToolbar = {() => (<NavToolbar hasBackButton={true} navigator={navigator}> </NavToolbar>)}>
+            <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>
                 <SimpleList  {...listProps} />
             </Page>
         );

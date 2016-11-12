@@ -29,8 +29,9 @@ class ProblemReport extends React.Component {
         this.onAddressSelected = this.onAddressSelected.bind(this);
     }
 
-    gotoNext(navigator, next) {
-        if (navigator && next) {
+    gotoNext(next) {
+        const { navigator } = this.props;
+        if (next && navigator) {
             navigator.pushPage({component: next});
         }
     }
@@ -45,7 +46,7 @@ class ProblemReport extends React.Component {
             return ons.notification.alert({message: 'something is wrong!'});
         }
 
-        this.gotoNext({component: OrderConfirmation});
+        this.gotoNext(OrderConfirmation);
     }
 
     onAddressSelected(evt) {
@@ -53,7 +54,7 @@ class ProblemReport extends React.Component {
     }
 
     updateAddress() {
-        this.gotoNext({component: AddressManagement});
+        this.gotoNext(AddressManagement);
     }
 
     render() {
@@ -61,13 +62,15 @@ class ProblemReport extends React.Component {
 
         let navBarProps = {
             navigator: navigator,
-            hasBackButton:true
+            hasBackButton:true,
+            title: '报修信息'
         };
 
         let userInfo = {};
-        let defaultAddressBlock = userInfo.defaultAddress ?
+        let selectedAddress = userInfo.defaultAddress; //needs to be updated on time.
+        let addressBlock = selectedAddress ?
             (<div>
-                使用默认地址: {userInfo.defaultAddress}
+                使用地址: {userInfo.defaultAddress}
             </div>)
             : null;
 
@@ -80,8 +83,8 @@ class ProblemReport extends React.Component {
                 </div>
 
                 {/*user address*/}
-                <Button> 选择上门服务地址 </Button>            
-                {defaultAddressBlock}
+                <Button onClick={this.updateAddress}> 选择上门服务地址 </Button>
+                {addressBlock}
 
                 {/*service date*/}
                 <DateTimePicker />

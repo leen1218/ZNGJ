@@ -39,12 +39,20 @@ class Categories extends React.Component {
 
     render() {
         const {navigator} = this.props;
+
         const listProps = {
             dataSource: this.dataSource,
             clickCallback: this.onItemSelected
         };
+
+        const navigatorProps = {
+            hasBackButton: true,
+            navigator: navigator,
+            title: '维修大类'
+        };
+
         return (
-            <Page renderToolbar = {() => (<NavToolbar hasBackButton={true} navigator={navigator}> </NavToolbar>)}>
+            <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>
                 <SimpleList  {...listProps} />
             </Page>
         );
