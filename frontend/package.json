@@ -57,6 +57,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "antd": "^2.4.1"
+    "antd": "^2.4.1",
+    "node-uuid": "^1.4.7"
   }
 }
