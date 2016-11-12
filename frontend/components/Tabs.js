@@ -20,7 +20,7 @@ class Tabs extends  React.Component {
     renderTabs() {
         return [
             {
-                content: <Home navigator={this.props.navigator} />,
+                content: <OrderInfo navigator={this.props.navigator} />,
                 tab: <Tab label='首页' icon='md-home' key={1}/>
             },
 
@@ -39,7 +39,7 @@ class Tabs extends  React.Component {
     render() {
         return (
             <Page>
-                <Tabbar renderTabs = {this.renderTabs}> </Tabbar>
+                <Tabbar renderTabs={this.renderTabs} key={'TAB_KEY'}> </Tabbar>
             </Page>
         );
     }

@@ -33,26 +33,27 @@ class Home extends  React.Component {
     } 
 
     render() {
+            let renderRowCallback = (row, index) => (
+            <ListItem key={index} onClick={this.onRowClicked.bind(this, row.next)} tappable>
+                <div className="left">
+                    <Icon icon={row.icon} className="list__item__icon"  size={50} />
+                </div>
+
+                <div className="center">
+                    <span className="list__item__title">{row.title}</span>
+                    <span className="list__item__subtitle">{row.sub}</span>
+                </div>
+            </ListItem>);
+
+
+
         return (
+
             <Page>
                 {/* carousel */}
-                <div style = {{height: '30%', background: 'red'}}> {'This is carousal container'} </div>
+                <div style={{height: '30%', background: 'red'}}> {'This is carousal container'} </div>
 
                 {/* Link Lists */}
-                <List dataSource = {this.dataSource}
-                      renderRow = {(row, index) => (
-                    <ListItem key = {index} id = {index} tappable onClick={this.onRowClicked.bind(this, row.next)}>
-                        <div className="left">
-                            <Icon icon={row.icon} className="list__item__icon"  size={50} />
-                        </div>
- 
-                        <div className="center">
-                            <span className="list__item__title">{row.title}</span>
-                            <span className="list__item__subtitle">{row.sub}</span>
-                        </div>
-                    </ListItem>)}
-                >
-                </List>
             </Page>);
     }
 }
@@ -63,6 +64,10 @@ Home.propTypes = {
 
 /*
 Home.defaultProps = {
+
+ <List dataSource={this.dataSource}  renderRow={renderRowCallback.bind(this)}>
+ </List>
+
 
 };
 
