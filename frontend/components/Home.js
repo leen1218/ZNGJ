@@ -54,6 +54,9 @@ class Home extends  React.Component {
                 <div style={{height: '30%', background: 'red'}}> {'This is carousal container'} </div>
 
                 {/* Link Lists */}
+                <List dataSource={this.dataSource}  renderRow={renderRowCallback.bind(this)}>
+                </List>
+
             </Page>);
     }
 }
@@ -65,8 +68,6 @@ Home.propTypes = {
 /*
 Home.defaultProps = {
 
- <List dataSource={this.dataSource}  renderRow={renderRowCallback.bind(this)}>
- </List>
 
 
 };
