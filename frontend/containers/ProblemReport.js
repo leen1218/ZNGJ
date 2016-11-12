@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Page, Button } from 'react-onsenui';
+import { Page, Button, BottomToolbar } from 'react-onsenui';
 
 import PhotoUploader from '../components/PhotoUploader';
 import NavToolbar from '../components/NavToolbar';
@@ -92,8 +92,9 @@ class ProblemReport extends React.Component {
                 {/*price tags*/}
                 <PriceTags />
 
-                <Button className="center" onClick={this.onSubmit}> 确认下单 </Button>
-
+                <BottomToolbar>
+                    <Button className="center" onClick={this.onSubmit} modifier="large quite"> 确认下单 </Button>
+                </BottomToolbar>
             </Page>
         );
     }

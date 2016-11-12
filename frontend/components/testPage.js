@@ -2,26 +2,26 @@
  * Created by Stone on 12/11/2016.
  */
 import React from 'react';
-import Ons from 'react-onsenui';
+import {Toolbar, Page, Tabbar} from 'react-onsenui';
 
 var MyTab = React.createClass({
     renderToolbar: function() {
         return (
-            <Ons.Toolbar>
+            <Toolbar>
                 <div className='center'>{this.props.title}</div>
-            </Ons.Toolbar>
+            </Toolbar>
         );
     },
 
     render: function() {
         return (
-            <Ons.Page renderToolbar={this.renderToolbar}>
+            <Page renderToolbar={this.renderToolbar}>
                 <section style={{margin: '16px'}}>
                     <p>
                         This is the <strong>{this.props.title}</strong> tab.
                     </p>
                 </section>
-            </Ons.Page>
+            </Page>
         );
     }
 });
@@ -47,7 +47,7 @@ var MyPage = React.createClass({
 
     render: function() {
         return (
-            <Ons.Tabbar
+            <Tabbar
                 index={this.state.index}
                 onPreChange={(event) =>
           {
@@ -64,3 +64,4 @@ var MyPage = React.createClass({
 
 
 export default MyPage;
+export {MyTab};
