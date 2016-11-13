@@ -30,7 +30,7 @@ class PriceTags extends React.Component {
     render() {
         let renderRow = (row, index) => {
             return (
-                <ListItem>
+                <ListItem key={index}>
                     <div className="left"> {row.name} </div>
                     <div className="right"> {row.price} </div>
                 </ListItem>

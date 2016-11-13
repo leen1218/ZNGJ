@@ -33,12 +33,22 @@
 // };
 
 
+import {v4 as generateId} from 'node-uuid';
+
+
+
 var Utils =  {
-
-    //gotoComponent : (navigator, next, props) => { navigator && next && navigator.pushPage({component: next, ...props})};
-
+    gotoComponent : (navigator, next, props) => { navigator && next && navigator.pushPage({component: next, props:props})},
+    assignID: () => {generateId()}
 };
 
 
+var DateTimeUtils = {
+    beforeNow: function (current) {
+        return current && current.valueOf() < Date.now();
+    }
+};
 
+
+export {Utils, DateTimeUtils}
 export default Utils;

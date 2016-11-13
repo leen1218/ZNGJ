@@ -39,7 +39,10 @@ class AddressManagement extends React.Component {
             title: '地址管理'
         };
 
-        const listProps = {};
+        const listProps = {
+            //todo render listItems for list
+
+        };
 
         return (
             <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>

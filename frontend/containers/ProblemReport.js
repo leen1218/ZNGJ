@@ -14,6 +14,8 @@ import AddressManagement from './AddressManagement';
 import DateTimePicker from '../components/DatePicker';
 
 import ons from 'onsenui'
+import { DateTimeUtils } from '../util';
+import '../styles/css/_ProblemReport.css';
 
 class ProblemReport extends React.Component {
 
@@ -27,6 +29,7 @@ class ProblemReport extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
         this.onAddressSelected = this.onAddressSelected.bind(this);
+        this.onDateSelected = this.onDateSelected.bind(this);
     }
 
     gotoNext(next) {
@@ -57,6 +60,10 @@ class ProblemReport extends React.Component {
         this.gotoNext(AddressManagement);
     }
 
+    onDateSelected(date, dateString) {
+        console.log(date, dateString);   //todo FIXME implementation.
+    }
+
     render() {
         const { navigator } = this.props;
 
@@ -74,21 +81,33 @@ class ProblemReport extends React.Component {
             </div>)
             : null;
 
+        let dateTimeProps = {
+            disabledDate: DateTimeUtils.beforeNow,
+            size: 'large',
+            onChange: this.onDateSelected
+        };
+
+
         return (
             <Page renderToolbar={()=>(<NavToolbar {...navBarProps} />)}>
 
                 {/*Photos*/}
-                <div className="photoTaker">
+                <section className="photoTaker">
                     <PhotoUploader />
-                </div>
+                </section>
+
 
                 {/*user address*/}
-                <Button onClick={this.updateAddress}> 选择上门服务地址 </Button>
-                {addressBlock}
+                <section>
+                    <Button onClick={this.updateAddress}> 选择上门服务地址 </Button>
+                    {addressBlock}
+                </section>
 
                 {/*service date*/}
-                <DateTimePicker />
-                
+                <section>
+                    <DateTimePicker {...dateTimeProps}/>
+                </section>
+
                 {/*price tags*/}
                 <PriceTags />
 
@@ -107,6 +126,7 @@ ProblemReport.propTypes = {
 const mapStateToProps = (state, ownProps) => {
      return null;
 };
+
 /*
 const mapDispatchToProps = (dispatch, ownProps) => {
      return null;
