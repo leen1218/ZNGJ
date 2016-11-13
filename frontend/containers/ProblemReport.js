@@ -106,6 +106,7 @@ class ProblemReport extends React.Component {
 
                 {/*service date*/}
                 <section>
+                    <div> 选择上门服务时间 </div>
                     <DateTimePicker {...dateTimeProps}/>
                 </section>
 
