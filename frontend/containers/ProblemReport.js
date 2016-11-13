@@ -90,7 +90,8 @@ class ProblemReport extends React.Component {
 
         return (
             <Page renderToolbar={()=>(<NavToolbar {...navBarProps} />)}>
-
+                <div className="pageWrapper">
+                
                 {/*Photos*/}
                 <section className="photoTaker">
                     <PhotoUploader />
@@ -114,6 +115,8 @@ class ProblemReport extends React.Component {
                 <BottomToolbar>
                     <Button className="center" onClick={this.onSubmit} modifier="large quite"> 确认下单 </Button>
                 </BottomToolbar>
+                    
+                </div>    
             </Page>
         );
     }

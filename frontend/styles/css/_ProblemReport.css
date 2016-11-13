@@ -1,3 +1,8 @@
 section {
     margin-top: 15px;
 }
+
+.pageWrapper {
+    width: 90%;
+    margin: 0 auto 0
+}
