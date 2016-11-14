@@ -6,6 +6,8 @@ import React, { PropTypes } from 'react';
 import { Page, Button, BottomToolbar } from 'react-onsenui';
 import SimpleList from '../components/SimpleList';
 import NavToolbar from '../components/NavToolbar';
+import Address from './Address';
+
 
 class AddressManagement extends React.Component {
 
@@ -28,7 +30,7 @@ class AddressManagement extends React.Component {
     }
 
     addAddress() {
-        this.gotoNext();     //todo
+        this.gotoNext();     //todo FIXME, use store.
     }
 
     render() {
@@ -40,25 +42,32 @@ class AddressManagement extends React.Component {
         };
 
         const listProps = {
-            //todo render listItems for list
-
+            dataSource: [1, 2, 3, 4, 5, 6, 7, 8, 9],     //todo FIXME, get from store.
+            renderRowCallback: (row, index) =>
+                <Address
+                    key={index}
+                    id={index}
+                    data={row}
+                    navigator={navigator}
+                > </Address>
         };
 
         return (
             <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>
-                <SimpleList  {...listProps} />
+
+                <SimpleList {...listProps}>
+                </SimpleList>
 
                 <BottomToolbar>
                     <Button onClick={this.addAddress} modifier="large quite" className="center"> 新增地址 </Button>
                 </BottomToolbar>
             </Page>
-
         );
     }
 }
 
 AddressManagement.propTypes = {
- 
+    navigator: PropTypes.object.isRequired
 };
 
 /*
