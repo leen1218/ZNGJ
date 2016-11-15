@@ -3,13 +3,18 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Page, Button, ListItem, Input } from 'react-onsenui';
+import { Page, Button, ListItem, Input, Icon } from 'react-onsenui';
 import SimpleList from './SimpleList';
 import NavToolbar from './NavToolbar';
+import Cascader from 'antd/lib/cascader';
+import Select from 'antd/lib/select'
 
-import '../styles/css/_addressEditor.css'
+import { Utils } from  '../util';
+import '../styles/css/_addressEditor.css';
+import 'antd/lib/cascader/style/css';
+import 'antd/lib/select/style/css';
 
-const placeholders = {
+const _placeholders = {
     name: '收货人地址',
     phone: '手机号码',
     postCode:'邮政编码(选填)',
@@ -17,15 +22,22 @@ const placeholders = {
     city: '城市',
     street: '街道'
 };
+const Option = Select.Option;
 
 class AddressEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { };
-        this.onSave=this.onSave.bind(this);
-    }
+        this.state = {
+            showCityPicker: false,
+            showStreetPicker: false
 
+        };
+        this.onSave=this.onSave.bind(this);
+        this.onPickerSelected=this.onPickerSelected.bind(this);
+        this.onUpdateCity=this.onUpdateCity.bind(this);
+        this.onUpdateStreet=this.onUpdateStreet.bind(this);
+    }
 
     onSave(evt) {
         //todo impl checking logic.
@@ -33,6 +45,23 @@ class AddressEditor extends React.Component {
         if (updateCallback) {
             updateCallback();
         }
+    }
+
+    onPickerSelected(evt) {
+        //todo FIMME IMPL.
+        console.log(evt);
+    }
+
+    onUpdateCity(value) {
+        console.log(value);
+    }
+
+    onUpdateStreet(value) {
+        console.log(value);
+    }
+
+    onUpdateEntity(name, value) {
+        console.log(value);
     }
 
     render() {
@@ -50,20 +79,19 @@ class AddressEditor extends React.Component {
             dataSource.push(
                 {
                     key: e,
-                    placeholder: placeholders[e],
+                    placeholder: _placeholders[e],
                     text: display[e]
                 }
             );
-
         });
-
 
         let renderRow = function(row, index) {
             let innerBlock = null;
             let isUpdating = me.props.isUpdating;
             let inputProps = {
                 placeholder: row.placeholder,
-                className: 'addressInput'
+                className: 'addressInput',
+                onChange: me.onUpdateEntity.bind(me, row.placeholder)   //error?????
             };
 
             if (isUpdating) {
@@ -77,36 +105,58 @@ class AddressEditor extends React.Component {
                     innerBlock = (<div className="center"> <Input float {...inputProps} /> </div>);
                     break;
                 case 'address':
-                    innerBlock = (<div className="center"> <textarea {...inputProps}></textarea> </div>);
+                    innerBlock = (<div className="center"> <textarea {...inputProps}></textarea></div>);
                     break;
                 case 'city':
                 case 'street':
                 {
-                    return (<ListItem>
-                        <div className="left"> test test </div>
-
+                    return (<ListItem key={row.key} tappable onClick={this.onPickerSelected}>
+                        <div className="center"> {isUpdating ? row.text : row.placeholder} </div>
+                        <div className="right"> 
+                            <Icon icon="md-arrow-right" className="list__item__icon"> </Icon>
+                        </div>
                     </ListItem>);
                 }
             }
-            if (innerBlock) {
-                return <ListItem> {innerBlock} </ListItem>
-            }
 
+            return <ListItem key={row.key}> {innerBlock} </ListItem>
         };
-
-
 
         let listProps = {
             dataSource: dataSource,
             renderRowCallback: renderRow
         };
 
+        let cascadeOptions = [].concat(Utils.getAddressMap('zj'));
+        let cascadeCityProps = {
+            options: cascadeOptions,
+            onChange: this.onPickerSelected,
+            style: {
+                display: (this.state.showCityPicker? 'block' : 'none')  
+            }
+        };
+
+        let streets =  [].concat(Utils.getStreetMap('zj-hz-scq'));
+        let innerSelectBlock = streets.map((e, i) => <Option value={e.value} key={i}> {e && e.label} </Option>);
+        let selectProps = {
+            onChange: this.onPickerSelected,
+            style: {
+                display: (this.state.showStreetPicker? 'block' : 'none')
+            }
+        };
 
         return (
             <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>
+                {/*address details*/}
                 <SimpleList  {...listProps} />
+                
+                <Button modifer="large quite" style={{'textAlign': 'center'}} onClick={this.onSave}> 保存 </Button>
 
-                 <Button modifer="large quite" styles={{'text-align': 'center'}} onClick={this.onSave}> 保存 </Button>
+                {/*city picker*/}
+                <Cascader {...cascadeCityProps} />
+
+                {/*street picker
+                <Select {...selectProps}> {innerSelectBlock} </Select> not working!!! */}
             </Page>
         );
     }

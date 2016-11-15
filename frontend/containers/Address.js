@@ -22,9 +22,13 @@ class Address extends React.Component {
 
     onDelete(evt) {
 
+        let deleteOrNot = function (a, b, c) {//todo FIXME call back is not working at all.
+             console.log(arguments);
+        };
+
         let options = {
             buttonLabels: ['取消', '确认'],
-            callback: null
+            callback: deleteOrNot
         };
         ons.notification.confirm({message: '确认删除'});
 

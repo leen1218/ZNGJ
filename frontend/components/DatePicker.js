@@ -6,11 +6,6 @@ import React, { PropTypes } from 'react';
 import DatePicker from 'antd/lib/date-picker';  // just for js
 import 'antd/lib/date-picker/style/css';  // with style
 
-
-//const { MonthPicker, RangePicker } = DatePicker;
-
-
-
 class DateTimePicker extends React.Component {
 
     constructor(props) {

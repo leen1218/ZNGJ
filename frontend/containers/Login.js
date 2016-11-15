@@ -80,7 +80,7 @@ class Login extends  React.Component {
             hasBackButton: true,
             navigator: navigator,
             fwdIcon : (ons.platform.isAndroid() ? false : 'ion-log-in'),
-            fwdCallback: this.signIn,
+            fwdCallback: this.signIn
         };
 
         return (
