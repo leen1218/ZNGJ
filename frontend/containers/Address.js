@@ -31,7 +31,7 @@ class Address extends React.Component {
             buttonLabels: ['取消', '确认'],
             callback: deleteOrNot
         };
-        ons.notification.confirm({message: '确认删除'});
+        ons.notification.confirm({message: '确认删除'}, options);
 
         let confirmed = false;
         if (confirmed) {

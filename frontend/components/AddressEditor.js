@@ -25,6 +25,8 @@ const _placeholders = {
 };
 const Option = Select.Option;
 
+//todo FIXME: performance concern, we always update the state once there is change on controls
+
 class AddressEditor extends React.Component {
 
     constructor(props) {
@@ -32,14 +34,13 @@ class AddressEditor extends React.Component {
         this.state = {
             showCityPicker: false,
             showStreetPicker: false,
-            addressInfo: {
-                name: '',
-                phone: '',
-                postCode: '',
-                address: '',
-                city: '',
-                street: ''
-            }
+
+            name: '',    //[discussion], we make the state flat. should we group them under something like 'addressinfo'
+            phone: '',
+            postCode: '',
+            address: '',
+            city: '',
+            street: ''
         };
 
         this.onSave=this.onSave.bind(this);
@@ -50,6 +51,8 @@ class AddressEditor extends React.Component {
 
     onSave(evt) {
         //todo impl checking logic.
+        console.log(this.state);
+
         const { updateCallback } = this.props;
         if (updateCallback) {
             updateCallback();
@@ -62,10 +65,10 @@ class AddressEditor extends React.Component {
                 this.setState({showCityPicker: true, showStreetPicker: false});
                 break;
             case 'street':
-                if (this.state.addressInfo.city.length) {
+                if (this.state.city.length) {
                     this.setState({showCityPicker: false, showStreetPicker: true});
                 } else {
-                    ons.notification.alert('请先选择城市信息');
+                    ons.notification.alert('请先选择城市信息', {title: '提醒', 'buttonLabel': '确认'});
                 }
                 break;
             default:
@@ -78,14 +81,14 @@ class AddressEditor extends React.Component {
         console.log(value);
         if (Array.isArray(value) && value) {
             let cityValue = value.join('/');
-            this.setState({addressInfo: {city: cityValue}});
+            this.setState({city: cityValue});
         }
     }
 
     onUpdateStreet(value) {
         console.log(value);
         if (value) {
-            this.setState({addressInfo: {street: value}});
+            this.setState({street: value});
         }
     }
 
@@ -93,9 +96,21 @@ class AddressEditor extends React.Component {
         console.log(name);
         console.log(evt);
 
-        if (evt && evt.srcElement) {
-            let value = evt.srcElement.value;
-            let newInfo = {addressInfo:{}};
+        let value = null;
+        let newInfo = null;
+
+        if (name === 'address')  //a text area.
+        {
+            value = this.textArea.value;
+        } else {
+            if (evt && evt.srcElement) {
+                value = evt.srcElement.value;
+            }
+        }
+
+        if (value !== null) {
+            //newInfo = Object.assign({}, this.state);
+            newInfo = {};
             newInfo[name] = value;
             this.setState(newInfo);
         }
@@ -142,7 +157,7 @@ class AddressEditor extends React.Component {
                     innerBlock = (<div className="center"> <Input float {...inputProps} /> </div>);
                     break;
                 case 'address':
-                    innerBlock = (<div className="center"> <textarea {...inputProps}></textarea></div>);
+                    innerBlock = (<div className="center"> <textarea ref={(textArea) => me.textArea = textArea} {...inputProps}></textarea></div>);
                     break;
                 case 'city':
                 case 'street':
@@ -182,8 +197,8 @@ class AddressEditor extends React.Component {
         let streets =  [].concat(Utils.getStreetMap('zj-hz-scq'));
         let innerSelectBlock = streets.map(
             function(e, i) {
-                console.log(e);
-                return (<Option value={e.value} key={i}> {e.label} </Option>);
+                //console.log(e);
+                return (<Select.Option value={e.value} key={i}> {e.label} </Select.Option>);
         });
         let selectProps = {
             onChange: this.onUpdateStreet,
@@ -199,7 +214,7 @@ class AddressEditor extends React.Component {
                 {/*address details*/}
                 <SimpleList  {...listProps} />
                 
-                <Button modifer="large quite" style={{'textAlign': 'center'}} onClick={this.onSave}> 保存 </Button>
+                <Button modifier="large quite" style={{'textAlign': 'center'}} onClick={this.onSave}> 保存 </Button>
 
                 {/*city picker*/}
                 <Cascader {...cascadeCityProps} />
