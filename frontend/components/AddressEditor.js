@@ -7,7 +7,8 @@ import { Page, Button, ListItem, Input, Icon } from 'react-onsenui';
 import SimpleList from './SimpleList';
 import NavToolbar from './NavToolbar';
 import Cascader from 'antd/lib/cascader';
-import Select from 'antd/lib/select'
+import Select from 'antd/lib/select';
+import ons from 'onsenui';
 
 import { Utils } from  '../util';
 import '../styles/css/_addressEditor.css';
@@ -30,9 +31,17 @@ class AddressEditor extends React.Component {
         super(props);
         this.state = {
             showCityPicker: false,
-            showStreetPicker: false
-
+            showStreetPicker: false,
+            addressInfo: {
+                name: '',
+                phone: '',
+                postCode: '',
+                address: '',
+                city: '',
+                street: ''
+            }
         };
+
         this.onSave=this.onSave.bind(this);
         this.onPickerSelected=this.onPickerSelected.bind(this);
         this.onUpdateCity=this.onUpdateCity.bind(this);
@@ -47,21 +56,49 @@ class AddressEditor extends React.Component {
         }
     }
 
-    onPickerSelected(evt) {
-        //todo FIMME IMPL.
-        console.log(evt);
+    onPickerSelected(code) {
+        switch (code) {
+            case 'city':
+                this.setState({showCityPicker: true, showStreetPicker: false});
+                break;
+            case 'street':
+                if (this.state.addressInfo.city.length) {
+                    this.setState({showCityPicker: false, showStreetPicker: true});
+                } else {
+                    ons.notification.alert('请先选择城市信息');
+                }
+                break;
+            default:
+                console.log('error: 0001');
+                break;
+        }
     }
 
     onUpdateCity(value) {
         console.log(value);
+        if (Array.isArray(value) && value) {
+            let cityValue = value.join('/');
+            this.setState({addressInfo: {city: cityValue}});
+        }
     }
 
     onUpdateStreet(value) {
         console.log(value);
+        if (value) {
+            this.setState({addressInfo: {street: value}});
+        }
     }
 
-    onUpdateEntity(name, value) {
-        console.log(value);
+    onUpdateEntity(name, evt) {
+        console.log(name);
+        console.log(evt);
+
+        if (evt && evt.srcElement) {
+            let value = evt.srcElement.value;
+            let newInfo = {addressInfo:{}};
+            newInfo[name] = value;
+            this.setState(newInfo);
+        }
     }
 
     render() {
@@ -91,7 +128,7 @@ class AddressEditor extends React.Component {
             let inputProps = {
                 placeholder: row.placeholder,
                 className: 'addressInput',
-                onChange: me.onUpdateEntity.bind(me, row.placeholder)   //error?????
+                onChange: me.onUpdateEntity.bind(me, row.key)
             };
 
             if (isUpdating) {
@@ -110,12 +147,14 @@ class AddressEditor extends React.Component {
                 case 'city':
                 case 'street':
                 {
-                    return (<ListItem key={row.key} tappable onClick={this.onPickerSelected}>
-                        <div className="center"> {isUpdating ? row.text : row.placeholder} </div>
-                        <div className="right"> 
-                            <Icon icon="md-arrow-right" className="list__item__icon"> </Icon>
-                        </div>
-                    </ListItem>);
+                    return (
+                        <ListItem key={row.key} tappable onClick={() => me.onPickerSelected(row.key)}>
+                            <div className="center"> {isUpdating ? row.text : row.placeholder} </div>
+                            <div className="right">
+                                <Icon icon="md-arrow-right" className="list__item__icon"> </Icon>
+                            </div>
+                        </ListItem>
+                    );
                 }
             }
 
@@ -127,19 +166,29 @@ class AddressEditor extends React.Component {
             renderRowCallback: renderRow
         };
 
+        //city information
         let cascadeOptions = [].concat(Utils.getAddressMap('zj'));
         let cascadeCityProps = {
             options: cascadeOptions,
-            onChange: this.onPickerSelected,
+            onChange: this.onUpdateCity,
+            size: 'large',
+            placeholder: '请选择省、市、区信息',
             style: {
                 display: (this.state.showCityPicker? 'block' : 'none')  
             }
         };
 
+        //streets information.
         let streets =  [].concat(Utils.getStreetMap('zj-hz-scq'));
-        let innerSelectBlock = streets.map((e, i) => <Option value={e.value} key={i}> {e && e.label} </Option>);
+        let innerSelectBlock = streets.map(
+            function(e, i) {
+                console.log(e);
+                return (<Option value={e.value} key={i}> {e.label} </Option>);
+        });
         let selectProps = {
-            onChange: this.onPickerSelected,
+            onChange: this.onUpdateStreet,
+            size: 'large',
+            placeholder: '请选择街道信息',
             style: {
                 display: (this.state.showStreetPicker? 'block' : 'none')
             }
@@ -155,8 +204,10 @@ class AddressEditor extends React.Component {
                 {/*city picker*/}
                 <Cascader {...cascadeCityProps} />
 
-                {/*street picker
-                <Select {...selectProps}> {innerSelectBlock} </Select> not working!!! */}
+                {/*street picker*/}
+                <Select {...selectProps}>
+                    { innerSelectBlock }
+                </Select>
             </Page>
         );
     }

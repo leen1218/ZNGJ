@@ -27,6 +27,7 @@ class Address extends React.Component {
         };
 
         let options = {
+            title: '请确认',
             buttonLabels: ['取消', '确认'],
             callback: deleteOrNot
         };
