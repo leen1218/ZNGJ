@@ -7,6 +7,7 @@ import { Page, Button, BottomToolbar } from 'react-onsenui';
 import SimpleList from '../components/SimpleList';
 import NavToolbar from '../components/NavToolbar';
 import Address from './Address';
+import AddressEditor from '../components/AddressEditor';
 
 
 class AddressManagement extends React.Component {
@@ -20,6 +21,7 @@ class AddressManagement extends React.Component {
         
         this.gotoNext = this.gotoNext.bind(this);
         this.addAddress = this.addAddress.bind(this);
+        this.onAddressAdded = this.onAddressAdded.bind(this);
     }
 
     gotoNext(next, props) {
@@ -30,7 +32,12 @@ class AddressManagement extends React.Component {
     }
 
     addAddress() {
-        this.gotoNext();     //todo FIXME, use store.
+        //todo FIXME, use store.
+        this.gotoNext(AddressEditor, {updateCallback: this.onAddressAdded});
+    }
+
+    onAddressAdded() {
+        //todo FIXME, add action/redurcer
     }
 
     render() {
