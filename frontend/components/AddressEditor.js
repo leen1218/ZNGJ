@@ -11,6 +11,7 @@ import Select from 'antd/lib/select';
 import ons from 'onsenui';
 
 import { Utils } from  '../util';
+import { DataUtils } from  '../util';
 import '../styles/css/_addressEditor.css';
 import 'antd/lib/cascader/style/css';
 import 'antd/lib/select/style/css';
@@ -23,9 +24,9 @@ const _placeholders = {
     city: '城市',
     street: '街道'
 };
-const Option = Select.Option;
 
 //todo FIXME: performance concern, we always update the state once there is change on controls
+
 
 class AddressEditor extends React.Component {
 
@@ -52,6 +53,21 @@ class AddressEditor extends React.Component {
     onSave(evt) {
         //todo impl checking logic.
         console.log(this.state);
+        let check = {};
+
+        DataUtils.checkEmpty(['name', 'phone', 'postCode', 'address', 'city', 'street'],
+                                this.state, _placeholders, check);
+        if (!check.ok) {
+            if (check.error) {
+                ons.notification.alert(check.error, {title: '提醒', 'buttonLabel': '确认'});
+            }
+            return;
+        }
+
+        if (!DataUtils.checkPhone(this.state.phone)) {
+            ons.notification.alert('手机号码格式不正确', {title: '提醒', 'buttonLabel': '确认'});
+            return;
+        }
 
         const { updateCallback } = this.props;
         if (updateCallback) {
@@ -109,7 +125,6 @@ class AddressEditor extends React.Component {
         }
 
         if (value !== null) {
-            //newInfo = Object.assign({}, this.state);
             newInfo = {};
             newInfo[name] = value;
             this.setState(newInfo);

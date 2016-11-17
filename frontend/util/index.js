@@ -34,6 +34,8 @@
 
 
 import {v4 as generateId} from 'node-uuid';
+import DataUtils from './DataUtils';
+import DateTimeUtils from './DateTimeUtils';
 
 const _cityMap =
 {
@@ -119,14 +121,10 @@ var Utils = {
     },
     getAddressMap: city => _cityMap[city] || _cityMap,
     getStreetMap: code => _streetMap[code]
-}
-
-var DateTimeUtils = {
-    beforeNow: function (current) {
-        return current && current.valueOf() < Date.now();
-    }
 };
 
 
-export {Utils, DateTimeUtils}
+
+
+export {Utils, DateTimeUtils, DataUtils}
 export default Utils;
