@@ -12,7 +12,7 @@ import ons from 'onsenui';
 
 import { Utils } from  '../util';
 import { DataUtils } from  '../util';
-import '../styles/css/_addressEditor.css';
+import '../styles/css/_AddressEditor.css';
 import 'antd/lib/cascader/style/css';
 import 'antd/lib/select/style/css';
 
