@@ -40,6 +40,14 @@ class AddressManagement extends React.Component {
         //todo FIXME, add action/redurcer
     }
 
+    onAddressSelectedChanged() {
+        //todo FIXME should we use a callback or store?
+        let {onAddressSelected} = this.props;
+        if (onAddressSelected) {
+            onAddressSelected();
+        }
+    }
+
     render() {
         const {navigator} = this.props;
         const navigatorProps = {
@@ -59,15 +67,17 @@ class AddressManagement extends React.Component {
                 > </Address>
         };
 
+        const buttonProps = {
+            //style: {position: 'fixed'},
+            onClick: this.addAddress,
+            modifier: "large"
+        };
+
         return (
             <Page renderToolbar = {() => (<NavToolbar {...navigatorProps}> </NavToolbar>)}>
-
                 <SimpleList {...listProps}>
                 </SimpleList>
-
-                <BottomToolbar>
-                    <Button onClick={this.addAddress} modifier="large quite" className="center"> 新增地址 </Button>
-                </BottomToolbar>
+                <Button {...buttonProps}> 新增地址 </Button>
             </Page>
         );
     }
