@@ -14,29 +14,32 @@ import AddressManagement from './AddressManagement';
 import DateTimePicker from '../components/DatePicker';
 
 import ons from 'onsenui'
-import { DateTimeUtils } from '../util';
+import { DateTimeUtils, Utils } from '../util';
 import '../styles/css/_ProblemReport.css';
+
+
+const _placeHolders = {
+    desc : '请描述具体问题(可选)'
+};
 
 class ProblemReport extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={};//todo FIXME populate states.
+        this.state={
+            selectedDate: "",
+            address: "",
+            problemDesc: ""
+        };//todo FIXME populate states.
         this.checkList = {};
 
 
-        this.gotoNext = this.gotoNext.bind(this);
+        //this.gotoNext = this.gotoNext.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
         this.onAddressSelected = this.onAddressSelected.bind(this);
         this.onDateSelected = this.onDateSelected.bind(this);
-    }
-
-    gotoNext(next) {
-        const { navigator } = this.props;
-        if (next && navigator) {
-            navigator.pushPage({component: next});
-        }
+        this.onDescChanged = this.onDescChanged.bind(this);
     }
 
     onSubmit() {
@@ -49,7 +52,7 @@ class ProblemReport extends React.Component {
             return ons.notification.alert({message: 'something is wrong!'});
         }
 
-        this.gotoNext(OrderConfirmation);
+        Utils.gotoComponent(this.props.navigator, OrderConfirmation);
     }
 
     onAddressSelected(evt) {
@@ -57,11 +60,23 @@ class ProblemReport extends React.Component {
     }
 
     updateAddress() {
-        this.gotoNext(AddressManagement);
+        Utils.gotoComponent(this.props.navigator, AddressManagement);
     }
 
     onDateSelected(date, dateString) {
-        console.log(date, dateString);   //todo FIXME implementation.
+        console.log(date, dateString);   //todo FIXME implementation.  Talk with backend on how to serialize the date format
+        this.setState({selectedDate: dateString});
+    }
+
+    onDescChanged(evt) {
+        if (evt && evt.srcElement) {    //not sure why this is not working....
+            this.setState({problemDesc: evt.srcElement.value});
+        } else {
+            let descTextArea = this.descTextArea;
+            if (descTextArea && descTextArea.value) {
+                this.setState({problemDesc: descTextArea.value});
+            }
+        }
     }
 
     render() {
@@ -88,6 +103,12 @@ class ProblemReport extends React.Component {
         };
 
 
+        let descProps = {
+            onChange: this.onDescChanged, 
+            placeholder:_placeHolders.desc,
+            ref: (descTextArea) => {this.descTextArea = descTextArea}
+        };
+        
         return (
             <Page renderToolbar={()=>(<NavToolbar {...navBarProps} />)}>
                 <div className="pageWrapper">
@@ -95,6 +116,7 @@ class ProblemReport extends React.Component {
                 {/*Photos*/}
                 <section className="photoTaker">
                     <PhotoUploader />
+                    <textarea className="problemDetails" {...descProps}></textarea>
                 </section>
 
 

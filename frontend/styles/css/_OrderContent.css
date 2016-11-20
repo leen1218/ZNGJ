@@ -1,0 +1,27 @@
+.orderContent {
+    //background: grey;
+}
+
+.orderContent.sink {
+    border-bottom: 1px;
+}
+
+.orderContent .row-content {
+    width: 100%;
+}
+
+
+.orderContent .row-content .left {
+    float: left;
+}
+
+.orderContent .row-content .right {
+    float: right;
+}
+
+
+.orderContent .clearFix {
+    clear: both;
+    zoom: 1;
+    overflow: auto;
+}

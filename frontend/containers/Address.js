@@ -8,6 +8,7 @@ import AddressEditor from '../components/AddressEditor';
 
 import ons from 'onsenui';
 import { Utils } from '../util'
+import '../styles/css/_Address.css';
 
 class Address extends React.Component {
 
@@ -22,8 +23,12 @@ class Address extends React.Component {
 
     onDelete(evt) {
 
-        let deleteOrNot = function (a, b, c) {//todo FIXME call back is not working at all.
-             console.log(arguments);
+        let deleteOrNot = function (src) {
+            // console.log(arguments);
+            if (src === 1) {
+                console.log(evt);
+                console.log('address deleted'); //todo FIXME IMPL
+            }
         };
 
         let options = {
@@ -31,13 +36,8 @@ class Address extends React.Component {
             buttonLabels: ['取消', '确认'],
             callback: deleteOrNot
         };
-        ons.notification.confirm({message: '确认删除'}, options);
 
-        let confirmed = false;
-        if (confirmed) {
-            console.log(evt);
-            console.log('address deleted'); //todo IMPL
-        }
+        ons.notification.confirm('确认删除', options);
     }
 
     onEdit(evt) {
@@ -78,12 +78,15 @@ class Address extends React.Component {
             <ListItem key={id}>
 
                 <div className="addressWrapper">
-                    <span className="left"> {userName} </span>
-                    <span className="right"> {userPhone} </span>
+                    <div>
+                    <div className="left1"> {userName} </div>
+                    <div className="right1"> {userPhone} </div>
+                    </div>
+
                     <div> {userAddress} </div>
                 </div>
 
-                <div className="editorWrapper">
+                <div className="addressEditorWrapper">
                     <label className="left">
                         <Input type="checkbox"
                                checked={isDefault}
@@ -91,7 +94,7 @@ class Address extends React.Component {
                         > 设为默认地址 </Input>
                     </label>
 
-                    <div style={{float: 'right'}}>
+                    <div className="right">
                         <span> <Button onClick={this.onEdit}> 编辑 </Button></span>
                         <span> <Button onClick={this.onDelete}> 删除 </Button></span>
                     </div>
