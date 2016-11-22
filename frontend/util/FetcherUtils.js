@@ -5,59 +5,70 @@ import 'isomorphic-fetch';
 import 'es6-promise';
 
 
-//settings
-const _config = {
-
-    API_ROOT: ''
-
-};
-
-
-const _config_header = {
-    
-};
-
-
-const _config_body = {
-    
-};
-
-
 //api
-function apiCall(options) {
-    
-}
+const defaultOptions = {
+    Method: 'GET',
+    //credentials : 'include',
+    headers : {
+        //x-auth-cookie: ''
+    }
+};
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response
     } else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
+        let useError = false;
+
+        if (useError) {
+            var error = new Error(response.statusText)
+            error.response = response;
+            throw error
+        } else {
+            return Promise.reject(response.statusText);
+        }
     }
 }
 
-
-function doGet() {
-    
+function parseJSON(response) {
+    return response.json()
 }
 
-function doPost() {
-    
+function apiCall(props) {
+    let {url, options} = props;
+    return fetch(url, options)
+        .then(checkStatus)
+        .then(parseJSON);
+        /*.then(function(data) {
+            console.log('request succeeded with JSON response', data)
+        }).catch(function(error) {
+        console.log('request failed', error)
+    })*/
 }
 
-function doDelete() {
-    
+function doGet(url) {
+    let options = Object.assign({}, defaultOptions);
+    return apiCall(url, options);
 }
 
-function doPut() {
-    
+function doPost(url, body) { //todo FIXME check body is encrypted or not.
+    let options = Object.assign({}, defaultOptions);
+    options.method = 'POST';
+    options.body =  body;
+    return apiCall(url, options);
 }
 
-//business logic
+function doDelete(url) {
+    let options = Object.assign({}, defaultOptions);
+    options.method = 'DELETE';
+    return apiCall(url, options);
+}
 
-
+function doPut(url, body) {
+    let options = Object.assign({}, defaultOptions);
+    options.method = 'PUT';
+    return apiCall(url, body);
+}
 
 
 export {doPost, doPut, doDelete, doGet};
