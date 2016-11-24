@@ -74,3 +74,10 @@
 // export const closeDialog = () => ({
 //   type: CLOSE_DIALOG
 // });
+
+
+
+export const CATEGORIES_REQUEST = 'CATEGORIES_REQUEST';
+export const REQUEST_CATEGORIES = 'CATEGORIES_SUCCESS';
+export const REQUEST_CATEGORIES = 'CATEGORIES_FAILUER';
+ 

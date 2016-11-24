@@ -55,7 +55,7 @@ class AddressEditor extends React.Component {
         console.log(this.state);
         let check = {};
 
-        DataUtils.checkEmpty(['name', 'phone', 'postCode', 'address', 'city', 'street'],
+        DataUtils.checkEmpty(['name', 'phone', 'postCode', 'address', 'city'/*, 'street'*/],
                                 this.state, _placeholders, check);
         if (!check.ok) {
             if (check.error) {
@@ -175,7 +175,6 @@ class AddressEditor extends React.Component {
                     innerBlock = (<div className="center"> <textarea ref={(textArea) => me.textArea = textArea} {...inputProps}></textarea></div>);
                     break;
                 case 'city':
-                case 'street':
                 {
                     return (
                         <ListItem key={row.key} tappable onClick={() => me.onPickerSelected(row.key)}>
@@ -186,6 +185,8 @@ class AddressEditor extends React.Component {
                         </ListItem>
                     );
                 }
+                case 'street': //do not show street for now.
+                    break;
             }
 
             return <ListItem key={row.key}> {innerBlock} </ListItem>
