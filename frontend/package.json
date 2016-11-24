@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "antd": "^2.4.1",
+    "es6-promise": "^4.0.5",
     "node-uuid": "^1.4.7"
   }
 }
