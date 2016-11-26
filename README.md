@@ -18,14 +18,10 @@ The Front end app is built on top of the following technologies:
 
 
 ### How to deploy.
-Make sure you have installed the latest `nodejs`
+1. Make sure you have installed the latest `nodejs`
 With nodejs, you will have the package manager tool `NPM` )
 
 Link to [nodejs](https://nodejs.org/en/)
-
-
-### General workflow of frontend app.
-![Frontend-workflow](./frontend.png)
 
 2. clone the code to your local ENV.
 > git clone https://github.com/leen1218/ZNGJ.git
@@ -36,6 +32,10 @@ Link to [nodejs](https://nodejs.org/en/)
 
 4. And you are good to go! Enjoy!
 >  npm start
+
+### General workflow of frontend app.
+![Frontend-workflow](./frontend.png)
+
 
 
 ## Backend Server
