@@ -14,8 +14,7 @@ The Front end app is built on top of the following technologies:
  8. isomorphic-fetch
  9. ping++
  10. RESTful API.
- 11. BackboneJS (optional)
- 12. Antd/React-components
+ 11. Antd/React-components
 
 
 ### How to deploy.
@@ -24,6 +23,9 @@ With nodejs, you will have the package manager tool `NPM` )
 
 Link to [nodejs](https://nodejs.org/en/)
 
+
+### General workflow of frontend app.
+![Frontend-workflow](./frontend.png)
 
 2. clone the code to your local ENV.
 > git clone https://github.com/leen1218/ZNGJ.git
