@@ -6,12 +6,12 @@
 const _config = {
     API_ROOT: '',
     PORT_GENERIC: '34592',
-    PROTOCAL: 'https://',
-    toURL : (endPoint) => `${this.API_ROOT} + '\/' + ${this.PORT_GENERIC} + '\/' + ${endPoint}`
+    PROTOCOL: 'https://'
 };
 
 const _config_header = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    'credential'  : 'include'
 };
 
 const _config_body = {
