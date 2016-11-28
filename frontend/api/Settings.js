@@ -3,10 +3,17 @@
  */
 
 //settings
+const HttpMethods = {
+    GET : 'GET',
+    POST: 'POST',
+    PUT : 'PUT',
+    DELETE: 'DELETE'
+};    
+
 const _config = {
-    API_ROOT: '',
-    PORT_GENERIC: '34592',
-    PROTOCOL: 'https://'
+    API_ROOT: '118.178.180.143',
+    PORT_GENERIC: '7000',
+    PROTOCOL: 'https'
 };
 
 const _config_header = {
@@ -18,6 +25,5 @@ const _config_body = {
 
 };
 
-
-export {_config, _config_header, _config_body};
+export {_config as URLConfig, _config_header, _config_body, HttpMethods};
 

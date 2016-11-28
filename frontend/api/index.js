@@ -59,12 +59,32 @@
 //     });
 // };
 
-import * as settings from './Settings';
-import * as API from './API';
-import * as Fetcher from '../util/FetcherUtils';
+import { HttpMethods } from './Settings';
+import { doPost, doPut, doDelete, doGet } from '../util/FetcherUtils';
 
 
+// Fetches an API response and normalizes the result JSON according to schema.
+// This makes every API response have the same shape, regardless of how nested it was.
+function callApi(url, method, options) {
 
+    switch (method) {
+        case HttpMethods.GET:
+            return doGet(url);
+            break;
+        case HttpMethods.PUT:
+            return doPut(url, options);
+            break;
+        case HttpMethods.DELETE:
+            return doDelete(url);
+            break;
+        case HttpMethods.POST:
+            return doPost(url, options);
+            break;
+        default:
+            throw new Error('unsupported http method');
+            break;
+    }
+}
 
 // Action key that carries API call info interpreted by this Redux middleware.
 export const CALL_API = Symbol('Call API');
@@ -78,7 +98,7 @@ export default store => next => action => {
     }
 
     let { endpoint } = callAPI;
-    const { schema, types } = callAPI;
+    let { method, types, options, callbacks } = callAPI;
 
     if (typeof endpoint === 'function') {
         endpoint = endpoint(store.getState())
@@ -87,12 +107,16 @@ export default store => next => action => {
     if (typeof endpoint !== 'string') {
         throw new Error('Specify a string endpoint URL.');
     }
-    if (!schema) {
-        throw new Error('Specify one of the exported Schemas.');
+
+    if (!method) {
+        //throw new Error('Specify one of the exported Schemas.');
+        method = HttpMethods.GET;
     }
+
     if (!Array.isArray(types) || types.length !== 3) {
         throw new Error('Expected an array of three action types.');
     }
+
     if (!types.every(type => typeof type === 'string')) {
         throw new Error('Expected action types to be strings.');
     }
@@ -106,7 +130,7 @@ export default store => next => action => {
     const [ requestType, successType, failureType ] = types;
     next(actionWith({ type: requestType }));
 
-    return callApi(endpoint, schema).then(
+    return callApi(endpoint, method, options).then(
         response => next(actionWith({
             response,
             type: successType
