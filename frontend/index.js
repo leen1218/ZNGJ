@@ -9,6 +9,7 @@ import {AppContainer} from 'react-hot-loader';
 
 import rootReducer from './reducers';
 import CustomerApp from './components/CustomerApp';
+import InitialStore from  './api/Settings';
 
 // import './icons/css/weather-icons.css';
 
@@ -21,7 +22,7 @@ const logger = createLogger();
 
 const store = createStore(rootReducer,
   //window.devToolsExtension ? window.devToolsExtension() : f => f,
-    {},
+    InitialStore,
     process.env.NODE_ENV === 'production'
     ? applyMiddleware(thunk, apiMiddleware)
     : applyMiddleware(thunk, apiMiddleware, logger)

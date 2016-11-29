@@ -12,7 +12,7 @@ const Applicances = {
 
     getAll: () => (dispatch, getState) => {
         let state = getState().appliances;
-        if (!state) {
+        if (!state || state.length === 0) {
             return dispatch({
                 [CALL_API] : {
                     types     : [ActionNames.CATEGORIES_REQUEST, ActionNames.CATEGORIES_SUCCESS, ActionNames.CATEGORIES_FAILURE],

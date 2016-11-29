@@ -25,5 +25,38 @@ const _config_body = {
 
 };
 
-export {_config as URLConfig, _config_header, _config_body, HttpMethods};
+const InitialStore = {
+    appliances: [],
+    brands: {},
+    user: null
+    /*
+    **
+
+     id: xxxx //string.
+
+     address: [ {}, {},     //crud 4.
+         {
+             location: STRING.
+             phone: STRING.
+             post : STRING.
+             city : [ STRING, STRING, STRING]
+             isDefault: BOOLEAN
+         }
+     ],
+
+
+     orders: [ //crud 4.
+         {
+             id: xxxx
+             details: {},
+             ratings: NUMBER
+         }
+     ]
+
+    *
+    * */
+};
+
+
+export {_config as URLConfig, _config_header, _config_body, HttpMethods, InitialStore};
 
