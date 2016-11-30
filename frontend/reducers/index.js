@@ -11,9 +11,13 @@ import {combineReducers} from 'redux';
 //
 // export default todoApp;
 
+function onAction(state = {}, action) {
 
-const rootReducer = combineReducers({
+    return state;
+}
 
+
+const rootReducer = combineReducers({ onAction
 });
 
 

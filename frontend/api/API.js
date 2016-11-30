@@ -2,23 +2,22 @@
  * Created by Stone on 22/11/2016.
  */
 
-import { doPost, doPut, doDelete, doGet } from '../util/FetcherUtils';
-import { _config } from './Settings';
+import { URLConfig, HttpMethods } from './Settings';
 import { CALL_API } from './index';
 import * as ActionNames from '../actions/Names';
 
-const URL_BASE = `${_config.PROTOCOL}://${_config.API_ROOT}:${_config.PORT_GENERIC}`;
+const URL_BASE = `${URLConfig.PROTOCOL}://${URLConfig.API_ROOT}:${URLConfig.PORT_GENERIC}`;
 
 const Applicances = {
 
-
     getAll: () => (dispatch, getState) => {
         let state = getState().appliances;
-        if (!state) {
+        if (!state || state.length === 0) {
             return dispatch({
                 [CALL_API] : {
-                    type: [ActionNames.CATEGORIES_REQUEST, ActionNames.CATEGORIES_SUCCESS, ActionNames.CATEGORIES_FAILURE],
-                    url : `${URL_BASE}/appliances`
+                    types     : [ActionNames.CATEGORIES_REQUEST, ActionNames.CATEGORIES_SUCCESS, ActionNames.CATEGORIES_FAILURE],
+                    endpoint : `${URL_BASE}/appliances`,
+                    method   : HttpMethods.GET
                 }
             });
         }
@@ -37,13 +36,11 @@ const Addresses = {
     updateOne: () => {}
 };
 
-
 const Login = {
     register: () => {},
     signIn: () => {},
     signOUt: () => {}
 };
-
 
 const Orders = {
     submit: () => {},
@@ -62,4 +59,4 @@ const Orders = {
 
 
 
-export {};
+export {Applicances, Addresses, Login, Orders};

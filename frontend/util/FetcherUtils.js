@@ -48,26 +48,26 @@ function apiCall(props) {
 
 function doGet(url) {
     let options = Object.assign({}, defaultOptions);
-    return apiCall(url, options);
+    return apiCall({url, options});
 }
 
 function doPost(url, body) { //todo FIXME check body is encrypted or not.
     let options = Object.assign({}, defaultOptions);
     options.method = 'POST';
     options.body =  body;
-    return apiCall(url, options);
+    return apiCall({url, options});
 }
 
 function doDelete(url) {
     let options = Object.assign({}, defaultOptions);
     options.method = 'DELETE';
-    return apiCall(url, options);
+    return apiCall({url, options});
 }
 
 function doPut(url, body) {
     let options = Object.assign({}, defaultOptions);
     options.method = 'PUT';
-    return apiCall(url, body);
+    return apiCall({url, body});
 }
 
 

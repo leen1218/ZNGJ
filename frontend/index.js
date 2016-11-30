@@ -9,21 +9,30 @@ import {AppContainer} from 'react-hot-loader';
 
 import rootReducer from './reducers';
 import CustomerApp from './components/CustomerApp';
+import InitialStore from  './api/Settings';
 
 // import './icons/css/weather-icons.css';
 
 import ons from 'onsenui';
 import 'onsenui/css/onsenui.css';
 import './styles/stylus/index.styl';
+import apiMiddleware from './api';
 
 const logger = createLogger();
 
 const store = createStore(rootReducer,
-  window.devToolsExtension ? window.devToolsExtension() : f => f,
-  process.env.NODE_ENV === 'production'
-    ? applyMiddleware(thunk)
-    : applyMiddleware(thunk, logger)
+  //window.devToolsExtension ? window.devToolsExtension() : f => f,
+    InitialStore,
+    process.env.NODE_ENV === 'production'
+    ? applyMiddleware(thunk, apiMiddleware)
+    : applyMiddleware(thunk, apiMiddleware, logger)
 );
+
+//test code
+// import {Applicances} from './api/API';
+// store.dispatch(Applicances.getAll());
+//test ends;
+
 
 const rootElement = document.getElementById('root');
 let isEngineer = false;
